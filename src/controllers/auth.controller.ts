@@ -16,6 +16,7 @@ export const createUserHandler = async (
   res: Response
 ) => {
   try {
+
     const user = await services.createUser(req.body);
     return successResponse("Successfully created", user, res);
   } catch (error: any) {
@@ -28,7 +29,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     const foundUser = await User.findOne({ where: { email: req.body.email } });
 
     if (!foundUser) {
-      return notFoundResponse("Email of user is not correct", {}, res);
+      return notFoundResponse("Incorrect Email", {}, res);
     }
 
     const isMatch = bcrypt.compareSync(req.body.password, foundUser.password);

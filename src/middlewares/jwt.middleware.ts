@@ -12,7 +12,6 @@ export const deserializeUser = async (
 
   console.log(token);
   if (!token) {
-    
     return next();
   }
 

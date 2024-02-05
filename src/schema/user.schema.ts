@@ -1,6 +1,7 @@
 import { nativeEnum, object, string, TypeOf } from "zod";
 import { UserType } from "../database/models/user.model";
 
+
 export const createUserSchema = object({
   body: object({
     name: string({
@@ -8,7 +9,7 @@ export const createUserSchema = object({
     }),
     password: string({
       required_error: "password is required",
-    }).min(6, "Password too short - should be 6 chars minimum"),
+    }).min(6, "Password too short - should be minimum of 6 character"),
     passwordConfirmation: string({
       required_error: "Confirmation password is required",
     }),
@@ -28,17 +29,11 @@ export const loginUserSchema = object({
   body: object({
     password: string({
       required_error: "password is required",
-    }).min(6, "Password too short - should be 6 chars minimum"),
-    passwordConfirmation: string({
-      required_error: "Confirmation password is required",
-    }),
+    }).min(6, "Password too short - should be minimum of 6 character"),
     email: string({
       required_error: "Email is required",
-    }).email("Not a valid email"),
-  }).refine((data) => data.password === data.passwordConfirmation, {
-    message: "Invalid Credentials !! Passwords do not match",
-    path: ["passwordConfirmation"],
-  }),
+    }).email("Invalid Credentials"),
+  })
 });
 
 export type CreateUserInput = Omit<

@@ -8,6 +8,7 @@ import { userRouter } from "./apis/auth.api";
 import { deserializeUser } from "./middlewares/jwt.middleware";
 import { contactRouter } from "./apis/contact.api";
 import { chatBotRouter } from "./apis/chatbot.api";
+import { propertyRouter } from "./apis/property.api";
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,7 @@ app.use(deserializeUser);
 app.use("/api/user", userRouter);
 app.use("/api/contact", contactRouter);
 app.use("/api/bot", chatBotRouter);
+app.use("/api/property", propertyRouter);
 
 // set up the view engine
 app.set("view engine", "ejs");
