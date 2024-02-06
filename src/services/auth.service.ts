@@ -6,6 +6,8 @@ export async function createUser(user: any): Promise<any> {
   try {
     delete user.passwordConfirmation;
     const newUser = await User.create(user);
+    console.log(newUser);
+    
     return {
       user: omit(newUser?.toJSON(), "password", "createdAt", "updatedAt"),
     };

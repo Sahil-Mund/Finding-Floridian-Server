@@ -63,7 +63,9 @@ export const userHandler = async (req: Request, res: Response) => {
 
 export const getUserHandler = async (req: Request, res: Response) => {
   try {
-    return successResponse("User details fetched successfully !!", { user: res.locals?.user }, res);
+
+    const user = await User.findByPk(res.locals?.user.id);
+    return successResponse("User details fetched successfully !!", { user: { name: user.name, email: user.email } }, res);
   } catch (error) {
     return serverError(error, res);
   }
