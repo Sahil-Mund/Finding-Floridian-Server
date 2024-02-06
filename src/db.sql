@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "Amenities" (
     UNIQUE ("id")
 );
 
-CREATE TABLE IF NOT EXISTS "Property_Gallery" (
+CREATE TABLE IF NOT EXISTS "Property_Galleries" (
   "id" UUID DEFAULT uuid_generate_v4() NOT NULL,
   "url" VARCHAR(255) DEFAULT NULL,
   "property_id" UUID DEFAULT NULL,

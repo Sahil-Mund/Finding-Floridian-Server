@@ -17,15 +17,21 @@ export const createUserHandler = async (
 ) => {
   try {
 
+    console.log('hey', req.body);
+
     const user = await services.createUser(req.body);
     return successResponse("Successfully created", user, res);
   } catch (error: any) {
+    console.log(error);
+
     return serverError(error, res);
   }
 };
 
 export const loginHandler = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
+
     const foundUser = await User.findOne({ where: { email: req.body.email } });
 
     if (!foundUser) {
@@ -36,11 +42,11 @@ export const loginHandler = async (req: Request, res: Response) => {
 
     if (isMatch) {
       const user = await services.loginUser(foundUser);
-      return successResponse("Successfully created", user, res);
+      return successResponse("Successfully found", user, res);
     } else {
       return badRequest("Password is not correct", {}, res);
     }
-    return;
+
   } catch (error) {
     console.log(error);
     return serverError(error, res);
@@ -50,6 +56,14 @@ export const loginHandler = async (req: Request, res: Response) => {
 export const userHandler = async (req: Request, res: Response) => {
   try {
     return successResponse("Successfully created", {}, res);
+  } catch (error) {
+    return serverError(error, res);
+  }
+};
+
+export const getUserHandler = async (req: Request, res: Response) => {
+  try {
+    return successResponse("User details fetched successfully !!", { user: res.locals?.user }, res);
   } catch (error) {
     return serverError(error, res);
   }

@@ -23,7 +23,8 @@ export interface PropertyAttributes {
     num_of_bathrooms: number;
     rating_id: UUID; // connected to rating table
     amenities: UUID;
-    located_at: string; //enum
+    located_in_florida: string; //enum
+    property_located_at: string;//enum
     has_opt_for_boosting: boolean;
     city: string;
     state: string;
@@ -50,7 +51,7 @@ const Property = sequelize.define<PropertyInstance>("Property", {
     subtitle: { type: DataTypes.STRING, allowNull: true },
     price: { type: DataTypes.NUMBER, allowNull: true },
     created_by: {
-        type: DataTypes.UUID, defaultValue: UUIDV4, references: {
+        type: DataTypes.UUID, references: {
             model: User,
             key: "id", // This should match the primary key of the User model
         },
@@ -74,7 +75,8 @@ const Property = sequelize.define<PropertyInstance>("Property", {
             key: "id", // This should match the primary key of the User model
         },
     },
-    located_at: { type: DataTypes.STRING, allowNull: true },//enum
+    located_in_florida: { type: DataTypes.STRING, allowNull: true },//enum
+    property_located_at: { type: DataTypes.STRING, allowNull: true },//enum
     has_opt_for_boosting: { type: DataTypes.BOOLEAN, allowNull: true },
     city: { type: DataTypes.STRING, allowNull: true },
     state: { type: DataTypes.STRING, allowNull: true },

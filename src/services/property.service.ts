@@ -3,6 +3,7 @@ import { omit } from "lodash";
 import Property from "../database/models/property.model";
 import Rating from "../database/models/rating.model";
 import Amenity from "../database/models/amenity.model";
+import PropertyGallery from "../database/models/propertyGallery.model";
 import { Transaction } from "sequelize";
 
 export async function createProperty(property: any, options: { transaction?: Transaction } = {}): Promise<any> {
@@ -52,6 +53,17 @@ export async function createAmenity(amenities: any, options: { transaction?: Tra
         }
         const newAmenity = await Amenity.create(input, options);
         return newAmenity?.toJSON();
+
+    } catch (error: any) {
+        console.log('ERROR', error);
+        throw error?.errors[0]?.message;
+    }
+}
+
+export async function addMediaToPropertyGallery(prop: any, options: { transaction?: Transaction } = {}): Promise<any> {
+    try {
+
+        await PropertyGallery.create(prop, options);
 
     } catch (error: any) {
         console.log('ERROR', error);

@@ -14,6 +14,7 @@ export interface UserAttributes {
   email: string;
   password?: string;
   role?: string;
+  phone_number: string;
 }
 
 interface UserInstance
@@ -41,6 +42,7 @@ const User = sequelize.define<UserInstance>("User", {
     },
   },
   password: { type: DataTypes.STRING, allowNull: false },
+  phone_number: { type: DataTypes.STRING, allowNull: false },
   role: {
     type: DataTypes.ENUM({
       values: Object.values(UserType),

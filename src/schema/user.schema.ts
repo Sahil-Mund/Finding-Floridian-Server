@@ -19,6 +19,9 @@ export const createUserSchema = object({
     email: string({
       required_error: "Email is required",
     }).email("Not a valid email"),
+    phone_number: string({
+      required_error: "Phone number is required",
+    })
   }).refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match",
     path: ["passwordConfirmation"], 

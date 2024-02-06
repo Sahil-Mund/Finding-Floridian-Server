@@ -16,5 +16,10 @@ userRouter.post(
   validate(loginUserSchema),
   userControllers.loginHandler
 );
+userRouter.get(
+  "/v1/getUserDetails",
+  [authorizeUser],
+  userControllers.getUserHandler
+);
 
 userRouter.post("/v1", [authorizeUser], userControllers.userHandler);
