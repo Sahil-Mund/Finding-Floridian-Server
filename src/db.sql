@@ -1,3 +1,6 @@
+
+
+
 CREATE TABLE IF NOT EXISTS "Properties" (
     "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
     "title" VARCHAR(255),
@@ -13,7 +16,8 @@ CREATE TABLE IF NOT EXISTS "Properties" (
     "num_of_bathrooms" INTEGER,
     "rating_id" UUID DEFAULT uuid_generate_v4(),
     "amenities" UUID DEFAULT uuid_generate_v4(),
-    "located_at" VARCHAR(255),
+    "located_in_florida" VARCHAR(255),
+    "property_located_at" VARCHAR(255),
     "has_opt_for_boosting" BOOLEAN,
     "city" VARCHAR(255),
     "state" VARCHAR(255),
@@ -22,8 +26,15 @@ CREATE TABLE IF NOT EXISTS "Properties" (
     "createdAt" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id"),
+     FOREIGN KEY ("rating_id") REFERENCES "Ratings" ("id"),
+    FOREIGN KEY ("amenities") REFERENCES "Amenities" ("id"),
+    FOREIGN KEY ("created_by") REFERENCES "Users" ("id"),
     UNIQUE ("id")
 );
+
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS "Ratings" (
