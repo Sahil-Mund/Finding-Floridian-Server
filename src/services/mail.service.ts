@@ -17,13 +17,14 @@ const sendContactUsEmail = async (subject: string, data: contactFormSchema) => {
   if (data.specifications && map[data.specifications as MapKey]) {
     let htmlString = mailer.renderTemplate(
       { data: data },
-      map[data.specifications as MapKey]
+      // map[data.specifications as MapKey]
+      "/common-template.ejs"
     );
 
     mailer.transporter.sendMail(
       {
         from: process.env.NODEMAILER_USER_EMAIL,
-        to: data?.email || "USER_EMAIL_NOT_FOUND",
+        to:  "sahil.mund@tryantler.com" || "USER_EMAIL_NOT_FOUND",
         subject,
         html: htmlString,
       },
