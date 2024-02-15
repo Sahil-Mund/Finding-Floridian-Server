@@ -17,8 +17,6 @@ export const createUserHandler = async (
 ) => {
   try {
 
-    console.log('hey', req.body);
-
     const user = await services.createUser(req.body);
     return successResponse("Successfully created", user, res);
   } catch (error: any) {
