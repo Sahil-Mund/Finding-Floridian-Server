@@ -34,4 +34,8 @@ app.get("/health-check", (req, res) => {
   res.send("Hello World!");
 });
 
+app.get("/", (req, res) => {
+  res.send("Server is running !!!");
+});
+
 export default app;

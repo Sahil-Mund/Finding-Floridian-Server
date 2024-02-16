@@ -21,6 +21,9 @@ const sendContactUsEmail = async (subject: string, data: contactFormSchema) => {
       "/common-template.ejs"
     );
 
+    console.log(htmlString);
+    
+
     mailer.transporter.sendMail(
       {
         from: process.env.NODEMAILER_USER_EMAIL,

@@ -33,6 +33,11 @@ export const sendMailHandler = async (
       );
     }
 
+    console.log('data:', {
+      firstName, lastName, message, email, phoneNumber, specifications
+    });
+    
+
     // Send mail to the user
     sendContactUsEmail("New Form Submitted", {
       firstName,
