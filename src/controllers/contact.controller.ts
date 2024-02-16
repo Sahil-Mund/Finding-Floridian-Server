@@ -32,10 +32,6 @@ export const sendMailHandler = async (
         res
       );
     }
-
-    console.log('data:', {
-      firstName, lastName, message, email, phoneNumber, specifications
-    });
     
 
     // Send mail to the user

@@ -10,7 +10,7 @@ export const deserializeUser = async (
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
-  console.log(token);
+  console.log('user_token',token);
   if (!token) {
     return next();
   }
