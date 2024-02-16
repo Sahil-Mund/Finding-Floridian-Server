@@ -75,7 +75,7 @@ export const sendAdminMailHandler = async (
 
 
     // Send mail to the user
-    sendMailToAdmin("New Form Submitted", {
+    await sendMailToAdmin("New Form Submitted", {
       firstName,
       lastName,
       email,
