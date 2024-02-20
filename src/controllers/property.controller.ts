@@ -20,15 +20,15 @@ export const createPropertyHandler = async (
         console.log('req.body', req.body);
 
         //Get all the data and destructure it
-        const { title, subtitle, city, state, flatNo: flat_no, zip: zip_code, price, mls, description,
+        const { title, subtitle, city, state, flatNo: flat_no, zip: zip_code, price, mls,
             property_type, num_of_bedroom: num_of_bedrooms,
             num_of_bathroom: num_of_bathrooms, located_in_florida, property_located_at,
             amenities, rating, banner_img: banner_img_url,
-            serviceType: service_type, gallery_images_urls, home_tour_video
+            serviceType: service_type, gallery_images_urls, home_tour_video, short_description, extended_description, area,
         } = req.body;
 
         const propertyParam = {
-            title, subtitle, city, state, flat_no, zip_code, price, mls, description,
+            title, subtitle, city, state, flat_no, zip_code, price, mls, short_description,  extended_description, area,
             property_type, num_of_bedrooms,
             num_of_bathrooms, property_located_at, located_in_florida, has_opt_for_boosting: true,
             banner_img_url, home_tour_video,

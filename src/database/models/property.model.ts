@@ -15,7 +15,9 @@ export interface PropertyAttributes {
     price: string;
     created_by: string;
     mls: string;
-    description: string;
+    short_description: string;
+    extended_description: string;
+    area: string;
     banner_img_url: string;
     service_type: string; //rent/sale
     property_type: string; //enum
@@ -57,7 +59,9 @@ const Property = sequelize.define<PropertyInstance>("Property", {
         },
     },
     mls: { type: DataTypes.STRING, allowNull: true },
-    description: { type: DataTypes.STRING, allowNull: true },
+    short_description: { type: DataTypes.STRING, allowNull: true },
+    extended_description: { type: DataTypes.STRING, allowNull: true },
+    area: { type: DataTypes.STRING, allowNull: true },
     banner_img_url: { type: DataTypes.STRING, allowNull: true },
     service_type: { type: DataTypes.STRING, allowNull: true }, //rent/sale
     property_type: { type: DataTypes.STRING, allowNull: true }, //enum

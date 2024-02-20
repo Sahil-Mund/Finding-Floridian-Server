@@ -18,6 +18,9 @@ export interface AmenityAttributes {
     concierge: boolean;
     waterfront: boolean;
     in_unit_laundry: boolean;
+    garage: boolean;
+    no_homeowners_association: boolean;
+    central_ac: boolean;
 }
 
 interface AmenityInstance
@@ -46,6 +49,9 @@ const Amenity = sequelize.define<AmenityInstance>("Amenity", {
     concierge: { type: DataTypes.BOOLEAN, allowNull: true },
     waterfront: { type: DataTypes.BOOLEAN, allowNull: true },
     in_unit_laundry: { type: DataTypes.BOOLEAN, allowNull: true },
+    garage: { type: DataTypes.BOOLEAN, allowNull: true },
+    central_ac: { type: DataTypes.BOOLEAN, allowNull: true },
+    no_homeowners_association: { type: DataTypes.BOOLEAN, allowNull: true },
 
 });
 
