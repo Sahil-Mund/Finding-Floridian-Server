@@ -7,7 +7,7 @@ export async function createUser(user: any): Promise<any> {
     delete user.passwordConfirmation;
     const newUser = await User.create(user);
     console.log(newUser);
-    
+
     return {
       user: omit(newUser?.toJSON(), "password", "createdAt", "updatedAt"),
     };
@@ -20,12 +20,20 @@ export async function createUser(user: any): Promise<any> {
 export async function loginUser(user: any): Promise<any> {
   try {
     const token = signJwt(
-      { id: user.id, role: user.role },
+      {
+        id: user.id, role: user.role,
+        "https://hasura.io/jwt/claims": {
+          "x-hasura-allowed-roles": [user.role === "USER" ? 'user' : 'admin'],
+          "x-hasura-default-role": "user",
+          "x-hasura-user-id": user.id,
+        }
+      },
       { expiresIn: "2 days" }
     );
     return {
       user: omit(user?.toJSON(), "password", "createdAt", "updatedAt"),
       token: token,
+
     };
   } catch (error: any) {
     throw error;

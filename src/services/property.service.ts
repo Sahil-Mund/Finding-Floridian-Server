@@ -24,7 +24,7 @@ export async function createProperty(property: any, options: { transaction?: Tra
 export async function createRating(rating: any, options: { transaction?: Transaction } = {}): Promise<any> {
     try {
         console.log(rating);
-        
+
         const newRating = await Rating.create(rating, options);
         return newRating?.toJSON();
 
@@ -53,6 +53,7 @@ export async function createAmenity(amenities: any, options: { transaction?: Tra
             garage: amenities.garage || false,
             central_ac: amenities.centralAC || false,
             no_homeowners_association: amenities.noHomeOwnersAssociation || false,
+            property_id: amenities.property_id
         }
         const newAmenity = await Amenity.create(input, options);
         return newAmenity?.toJSON();

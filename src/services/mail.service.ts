@@ -71,21 +71,23 @@ export const sendMailToAdmin = async (subject: string, data: any) => {
   let htmlString = `
     <div>
   <h4>Hi Carter,</h4>
-  <p>A new User has tried to contact you, here is the user details.</p>
+  <p>A new User has tried to contact you, here is the details.</p>
 
   <p>First Name :- ${data.firstName} </p>
   <p>Last Name :- ${data.lastName} </p>
   <p>Email :- ${data.email}</p>
   <p>Phone Number :- ${data.phone}</p>
+  <p>Specifications:- ${data.specifications} </p>
+  <p>Message:- ${data.message} </p>
   <p>Thanks!</p>
 </div>
     `
 
-    console.log(htmlString);
-    
+  console.log(htmlString);
 
 
- await mailer.transporter.sendMail(
+
+  await mailer.transporter.sendMail(
     {
       from: process.env.NODEMAILER_USER_EMAIL,
       to: process.env.ADMIN_EMAIL || "USER_EMAIL_NOT_FOUND",
@@ -104,6 +106,6 @@ export const sendMailToAdmin = async (subject: string, data: any) => {
   );
 
   console.log('email message sent');
-  
+
 };
 

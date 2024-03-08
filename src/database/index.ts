@@ -11,5 +11,5 @@ sequelize
   });
 
 //sync all tables/models
-User.sync();
+// User.sync();
 

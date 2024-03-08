@@ -4,6 +4,7 @@ import sequelize from "../../configs/db.config";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import { UUID } from "crypto";
+import Property from "./property.model";
 
 export interface AmenityAttributes {
     id: UUID;
@@ -21,6 +22,7 @@ export interface AmenityAttributes {
     garage: boolean;
     no_homeowners_association: boolean;
     central_ac: boolean;
+    property_id: UUID;
 }
 
 interface AmenityInstance
@@ -52,6 +54,10 @@ const Amenity = sequelize.define<AmenityInstance>("Amenity", {
     garage: { type: DataTypes.BOOLEAN, allowNull: true },
     central_ac: { type: DataTypes.BOOLEAN, allowNull: true },
     no_homeowners_association: { type: DataTypes.BOOLEAN, allowNull: true },
+    property_id: { type: DataTypes.UUID, allowNull: false , references:{
+        model: Property,
+        key: "id",
+    }},
 
 });
 

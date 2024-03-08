@@ -81,3 +81,33 @@ CREATE TABLE IF NOT EXISTS "Property_Galleries" (
   PRIMARY KEY ("id"),
   FOREIGN KEY ("property_id") REFERENCES "Properties" ("id")
 );
+
+
+-- match faqs
+
+create function match_faqs (
+  query_embedding vector (1536),
+  match_count int default null,
+  filter jsonb default '{}'
+) returns table (
+  id bigint,
+  content text,
+  metadata jsonb,
+  embedding jsonb,
+  similarity float
+) language plpgsql as $$
+#variable_conflict use_column
+begin
+  return query
+  select
+    id,
+    content,
+    metadata,
+    (embedding::text)::jsonb as embedding,
+    1 - (bot_faq_data.embedding <=> query_embedding) as similarity
+  from bot_faq_data
+  where metadata @> filter
+  order by bot_faq_data.embedding <=> query_embedding
+  limit match_count;
+end;
+$$;

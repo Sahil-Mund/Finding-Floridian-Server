@@ -32,9 +32,9 @@ export const getBotResponse = async (
 
     const response = await getResponseByBot(query);
     console.log(response);
-    
 
-    return successResponse("Response generated successfully !!", response.text, res);
+
+    return successResponse("Response generated successfully !!", response, res);
   } catch (error: any) {
     console.log(error);
 

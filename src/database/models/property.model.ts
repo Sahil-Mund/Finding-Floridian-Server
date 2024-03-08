@@ -23,8 +23,8 @@ export interface PropertyAttributes {
     property_type: string; //enum
     num_of_bedrooms: number;
     num_of_bathrooms: number;
-    rating_id: UUID; // connected to rating table
-    amenities: UUID;
+    // rating_id: UUID; // connected to rating table
+    // amenities: UUID;
     located_in_florida: string; //enum
     property_located_at: string;//enum
     has_opt_for_boosting: boolean;
@@ -67,18 +67,18 @@ const Property = sequelize.define<PropertyInstance>("Property", {
     property_type: { type: DataTypes.STRING, allowNull: true }, //enum
     num_of_bedrooms: { type: DataTypes.NUMBER, allowNull: true },
     num_of_bathrooms: { type: DataTypes.NUMBER, allowNull: true },
-    rating_id: {
-        type: DataTypes.UUID, allowNull: true, references: {
-            model: Rating,
-            key: "id", // This should match the primary key of the User model
-        },
-    }, // connected to rating table
-    amenities: {
-        type: DataTypes.UUID, allowNull: true, references: {
-            model: Amenity,
-            key: "id", // This should match the primary key of the User model
-        },
-    },
+    // rating_id: {
+    //     type: DataTypes.UUID, allowNull: true, references: {
+    //         model: Rating,
+    //         key: "id", // This should match the primary key of the User model
+    //     },
+    // }, // connected to rating table
+    // amenities: {
+    //     type: DataTypes.UUID, allowNull: true, references: {
+    //         model: Amenity,
+    //         key: "id", // This should match the primary key of the User model
+    //     },
+    // },
     located_in_florida: { type: DataTypes.STRING, allowNull: true },//enum
     property_located_at: { type: DataTypes.STRING, allowNull: true },//enum
     has_opt_for_boosting: { type: DataTypes.BOOLEAN, allowNull: true },

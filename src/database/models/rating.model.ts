@@ -4,6 +4,7 @@ import sequelize from "../../configs/db.config";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import { UUID } from "crypto";
+import Property from "./property.model";
 
 export interface RatingAttributes {
     id: UUID;
@@ -13,6 +14,8 @@ export interface RatingAttributes {
     quality_of_schools: number;
     distance_to_the_ocean: number;
     proximity_to_lake: number;
+    property_id: UUID;
+    
 }
 
 interface RatingInstance
@@ -36,7 +39,10 @@ const Rating = sequelize.define<RatingInstance>("Rating", {
     quality_of_schools: { type: DataTypes.NUMBER, allowNull: true },
     distance_to_the_ocean: { type: DataTypes.NUMBER, allowNull: true },
     proximity_to_lake: { type: DataTypes.NUMBER, allowNull: true },
-
+    property_id: { type: DataTypes.UUID, allowNull: false , references:{
+        model: Property,
+        key: "id",
+    }},
 });
 
 

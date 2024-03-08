@@ -5,8 +5,9 @@ import bcrypt from "bcrypt";
 import "dotenv/config";
 
 export enum UserType {
-  admin = "ADMIN",
-  user = "USER",
+  admin = "admin",
+  buyer = "buyer",
+  realtor = "realtor",
 }
 export interface UserAttributes {
   id?: string;
@@ -47,7 +48,7 @@ const User = sequelize.define<UserInstance>("User", {
     type: DataTypes.ENUM({
       values: Object.values(UserType),
     }),
-    defaultValue: UserType.user,
+    defaultValue: UserType.buyer,
   },
 });
 

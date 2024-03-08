@@ -9,6 +9,7 @@ import { deserializeUser } from "./middlewares/jwt.middleware";
 import { contactRouter } from "./apis/contact.api";
 import { chatBotRouter } from "./apis/chatbot.api";
 import { propertyRouter } from "./apis/property.api";
+import { insertDocs } from "./utils/insert";
 
 const app = express();
 app.use(cors());
@@ -33,6 +34,8 @@ app.set("views", "./views");
 app.get("/health-check", (req, res) => {
   res.send("Hello World!");
 });
+
+// insertDocs();
 
 app.get("/", (req, res) => {
   res.send("Server is running !!!");
