@@ -21,5 +21,9 @@ userRouter.get(
   [authorizeUser],
   userControllers.getUserHandler
 );
+userRouter.put("/v1/updateProfile", [authorizeUser],
+userControllers.getUserProfileUpdateHandler);
+userRouter.put("/v1/update-profile-password", [authorizeUser],
+userControllers.getUserProfilePasswordUpdateHandler);
 
 userRouter.post("/v1", [authorizeUser], userControllers.userHandler);

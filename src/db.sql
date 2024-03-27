@@ -111,3 +111,67 @@ begin
   limit match_count;
 end;
 $$;
+
+-- filter properties--
+
+CREATE
+OR REPLACE FUNCTION public.get_filtered_properties (
+  min_price NUMERIC,
+  max_price NUMERIC,
+  num_bathrooms INTEGER,
+  num_bedrooms INTEGER,
+  transit_rating INTEGER,
+  shop_rating INTEGER,
+  health_rating INTEGER,
+  food_rating INTEGER,
+  entertainment_rating INTEGER,
+  coffee_rating INTEGER,
+  grocery_rating INTEGER,
+  fitness_rating INTEGER,
+  childcare_rating INTEGER,
+  park_rating INTEGER,
+  high_rating INTEGER,
+  elem_rating INTEGER,
+  service_type_value TEXT,
+  location_value TEXT,
+  florida_sub_location_value TEXT
+) RETURNS TABLE (property_id UUID, title varchar(255)) LANGUAGE plpgsql AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        p.id,
+        p.title
+       
+    FROM public."Properties" p
+    JOIN public.service_type_master st ON p.service_type_id = st.service_type_id
+    JOIN public.property_location_master lm ON p.location_id = lm.location_id
+    JOIN public.property_florida_sub_location_master flsm ON p.florida_sub_location_id = flsm.sub_location_id
+    LEFT JOIN public."Ratings" r ON p.id = r.property_id
+    WHERE (p.price BETWEEN min_price AND max_price OR min_price IS NULL OR max_price IS NULL)
+    AND (p.num_of_bathrooms >= num_bathrooms OR num_bathrooms IS NULL)
+    AND (p.num_of_bedrooms >= num_bedrooms OR num_bedrooms IS NULL)
+    -- AND (r."OverallScore" = overall_score_rating OR overall_score_rating IS NULL)
+   AND (st.type = service_type_value OR service_type_value IS NULL)
+    AND (lm.location = location_value OR location_value IS NULL)
+    AND (flsm.sub_location = florida_sub_location_value OR florida_sub_location_value IS NULL);
+
+    /*
+LEFT JOIN public."Amenities" am on am.property_id = p.id
+    where am.new_construction is true
+    and am.newly_renovated is true
+    and am.pool is true
+    and am.gym is true
+    and am.yard is true
+    and am.luxury is true
+    and am.pet_friendly is true
+    and am.parking is true
+    and am.concierge is true
+    and am.waterfront is true
+    and am.in_unit_laundry is true
+    and am.no_homeowners_association is true
+    and am.garage is true
+
+    */
+
+END;
+$$;

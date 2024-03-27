@@ -109,3 +109,57 @@ export const sendMailToAdmin = async (subject: string, data: any) => {
 
 };
 
+export const sendHomeTourRequestNotification = async (data: any) => {
+
+  const ADMIN_MAIL = 'sahil.mund@tryantler.com'
+
+  let htmlString = `
+    <div>
+  <h4>Dear Carter,</h4>
+  <p>${data.userName} has requested for a home tour. Please find the details below of user and the property: - </p>
+  <p>User Name :- ${data.userName}</p>
+  <p>User Email :- ${data.userEmail}</p>
+  <p>User Phone :- ${data.userPhone}</p>
+<br/>
+<p>Property Title:- ${data.property_title}</p>
+<p>Property Short Description:- ${data.property_short_description}</p>
+<p>Property Type:- ${data.property_type}</p>
+<p>Property Price:- ${data.property_price}</p>
+
+  <p>Thanks!</p>
+</div>
+    `
+
+  console.log(htmlString);
+
+
+  try {
+
+    await mailer.transporter.sendMail(
+      {
+        from: process.env.NODEMAILER_USER_EMAIL,
+        to: ADMIN_MAIL || "USER_EMAIL_NOT_FOUND",
+        subject: 'New Home Tour Request',
+        html: htmlString,
+      },
+      (err: Error, info: any) => {
+        if (err) {
+          console.log("Error in sending mail", err);
+          return;
+        }
+
+        console.log("Message sent", info);
+        return;
+      }
+    );
+
+    console.log('email message sent');
+    return;
+
+  } catch (error) {
+    console.log(error);
+    return;
+
+  }
+}
+

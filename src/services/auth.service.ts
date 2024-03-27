@@ -23,8 +23,8 @@ export async function loginUser(user: any): Promise<any> {
       {
         id: user.id, role: user.role,
         "https://hasura.io/jwt/claims": {
-          "x-hasura-allowed-roles": [user.role === "USER" ? 'user' : 'admin'],
-          "x-hasura-default-role": "user",
+          "x-hasura-allowed-roles": ['user','realtor','admin','buyer'],
+          "x-hasura-default-role": user.role,
           "x-hasura-user-id": user.id,
         }
       },
